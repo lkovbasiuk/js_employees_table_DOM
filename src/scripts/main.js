@@ -1,9 +1,10 @@
 'use strict';
 
-let clickCount = 0;
 const tHead = document.querySelector('thead');
 
 tHead.querySelectorAll('th').forEach((th) => {
+  let clickCount = 0;
+
   th.addEventListener('click', () => {
     clickCount++;
 
@@ -116,15 +117,12 @@ const pushNotification = (title, description, type) => {
   block.classList.add(type);
   document.body.appendChild(block);
 
-  const titles = document.createElement('h2');
-
-  titles.classList.add('title');
-  titles.textContent = title;
-  block.appendChild(titles);
-
   const descriptionArr = description.split('\n');
 
-  block.innerHTML = `<p>${descriptionArr[0]}<br>${descriptionArr[1]}</p>`;
+  block.innerHTML = `
+  <h2 class="title">${title}</h2>
+  <p>${descriptionArr[0]}<br>${descriptionArr[1]}</p>
+  `;
 
   setTimeout(() => {
     block.style.display = 'none';
@@ -137,8 +135,6 @@ button.addEventListener('click', (e) => {
   e.preventDefault();
 
   const newRow = document.createElement('tr');
-
-  tBody.appendChild(newRow);
 
   const userName = document.querySelector('[data-qa="name"]').value;
   const position = document.querySelector('[data-qa="position"]').value;
@@ -165,6 +161,8 @@ button.addEventListener('click', (e) => {
   <td>${age}</td>
   <td>${salary}</td>
   `;
+
+    tBody.appendChild(newRow);
 
     pushNotification(
       'Title of Success message',
